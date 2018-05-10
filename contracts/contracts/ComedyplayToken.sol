@@ -4,210 +4,194 @@ import './Ownable.sol';
 import './SafeMath.sol';
 import './MintableToken.sol';
 import './WhiteListAccess.sol';
-
-contract ComedyplayToken is Ownable, MintableToken, WhiteListAccess {
-  using SafeMath for uint256;
-
-  string public constant name = "ComedyplayToken";
-  string public constant symbol = "CCP";
-  uint256 public constant decimals = 18;
-
-  // 2018-05-29 00:00:00 GMT - start time for private sale
-  uint256 private constant privatesaleStartTime = 1527552000;
-
-  // 2018-05-31 23:59:59 GMT - end time for private sale
-  uint256 private constant privatesaleEndTime = 1527811199;
-
-  // 2018-07-20 00:00:00 GMT - start time for pre sale
-  uint256 private constant presaleStartTime = 1532044800;
-
-  // 2018-08-20 23:59:59 GMT - end time for pre sale
-  uint256 private constant presaleEndTime = 1534809599;
-
-  // 2018-12-02 00:00:00 GMT - start time for main sale
-  uint256 private constant mainsaleStartTime = 1543708800;
-
-  // 2019-01-15 23:59:59 GMT - end time for main sale
-  uint256 private constant mainsaleEndTime = 1516060799;
+import './Crowdsale.sol';
 
 
-  // ============= Token Distribution ================
-  uint256 public maxTokens = 700000000 * 1 ether;
-  uint256 public totalTokensForSale = 49000000 * 1 ether;
-  uint256 public tokensForTeam = 10500000 * 1 ether;
-  uint256 public tokensForReserve = 7000000 * 1 ether;
-  uint256 public tokensForBounty = 2100000 * 1 ether;
-  uint256 public tokenForPartnership = 1400000 * 1 ether;
+contract ComedyplayCrowdsale is Ownable, WhiteListAccess, Crowdsale, MintableToken {
+    using SafeMath for uint256;
 
-  // The token being sold
-  MintableToken public token;
+    // TODO : Update the privatesaleStartTime
+    // 2018-05-29 00:00:00 GMT - start time for private sale
+    uint256 private constant privatesaleStartTime = 1525717871;
 
-  // address where funds are collected
-  address public wallet;
+    // 2018-05-31 23:59:59 GMT - end time for private sale
+    uint256 private constant privatesaleEndTime = 1527811199;
 
-  // how many token units a buyer gets per wei
-  uint256 public rate;
+    // 2018-07-20 00:00:00 GMT - start time for pre sale
+    uint256 private constant presaleStartTime = 1532044800;
 
-  // amount of raised money in wei
-  uint256 public PrivatesaleWeiRaised;
-  uint256 public PresaleWeiRaised;
-  uint256 public mainsaleWeiRaised;
+    // 2018-08-20 23:59:59 GMT - end time for pre sale
+    uint256 private constant presaleEndTime = 1534809599;
 
-  // ===== Cap & Goal Management =====
-  uint256 public privatesaleCap;
-  uint256 public privatesaleGoal;
-  uint256 public presaleCap;
-  uint256 public presaleGoal;
-  uint256 public mainsaleCap;
-  uint256 public mainsaleGoal;
+    // 2018-12-02 00:00:00 GMT - start time for main sale
+    uint256 private constant mainsaleStartTime = 1543708800;
 
-  /**
-   * event for token purchase logging
-   * @param purchaser who paid for the tokens
-   * @param beneficiary who got the tokens
-   * @param value weis paid for purchase
-   * @param amount amount of tokens purchased
-   */
-  event TokenPurchase(
-    address indexed purchaser,
-    address indexed beneficiary,
-    uint256 value,
-    uint256 amount
-    );
+    // 2019-01-15 23:59:59 GMT - end time for main sale
+    uint256 private constant mainsaleEndTime = 1516060799;
 
-  // ===== Constructor =====
-  function ComedyplayToken() public {
-    rate = 20000;
-    wallet = msg.sender;
-    privatesaleCap = 500 * 1 ether;
-    privatesaleGoal = 200 * 1 ether;
-    presaleCap = 2000 * 1 ether;
-    presaleGoal = 700 * 1 ether;
-    mainsaleCap = 7000 * 1 ether;
-    mainsaleGoal = 3000 * 1 ether;
-  }
+    // ===== Cap & Goal Management =====
+    uint256 public constant privatesaleCap = 500 * (10 ** uint256(decimals));
+    uint256 public constant presaleCap = 2000 * (10 ** uint256(decimals));
+    uint256 public constant mainsaleCap = 7000 * (10 ** uint256(decimals));
+
+    // ============= Token Distribution ================
+    uint256 public constant INITIAL_SUPPLY = 700000000 * (10 ** uint256(decimals));
+    uint256 public constant totalTokensForSale = 49000000 * (10 ** uint256(decimals));
+    uint256 public constant tokensForTeam = 10500000 * (10 ** uint256(decimals));
+    uint256 public constant tokensForReserve = 7000000 * (10 ** uint256(decimals));
+    uint256 public constant tokensForBounty = 2100000 * (10 ** uint256(decimals));
+    uint256 public constant tokenForPartnership = 1400000 * (10 ** uint256(decimals));
+
+    // how many token units a buyer gets per wei
+    uint256 public rate;
+    mapping (address => uint256) public deposited;
 
 
-  // ====================== Price Management =================
-  function setPrice() public onlyOwner {
-    if (isPrivatesalePeriod()) {
-      setCurrentRate(20000);
-    } else if (isPresalePeriod()) {
-      setCurrentRate(12500);
-    } else if (isMainsalePeriod()) {
-      setCurrentRate(5000);
-    }
-  }
+    uint256 public countInvestor;
 
-  // Change the current rate
-  function setCurrentRate(uint256 _rate) private onlyOwner {
-      rate = _rate;
-  }
+    event TokenPurchase(address indexed beneficiary, uint256 value, uint256 amount);
+    event TokenLimitReached(uint256 tokenRaised, uint256 purchasedToken);
+    event Finalized();
 
-  // ====== Token Purchase ===============
-  function () external payable {
-    uint256 tokensThatWillBeMintedAfterPurchase = msg.value.mul(rate);
-    require(totalSupply_ + tokensThatWillBeMintedAfterPurchase < totalTokensForSale);
-    buyTokens(msg.sender);
-  }
+    function ComedyplayCrowdsale(
+      address _owner,
+      address _wallet
+      ) public Crowdsale(_wallet) {
 
-  function buyTokens(address _beneficiary) public payable {
-    require(msg.sender != address(0));
-    require(validPurchase());
-    if (isPrivatesalePeriod()) {
-      require(whitelist[msg.sender]);
+        require(_wallet != address(0));
+        require(_owner != address(0));
+        owner = _owner;
+        transfersEnabled = true;
+        mintingFinished = false;
+        totalSupply = INITIAL_SUPPLY;
+        rate = 20000;
+        bool resultMintForOwner = mintForOwner(owner);
+        require(resultMintForOwner);
     }
 
-    uint256 weiAmount = msg.value;
-
-    // calculate token amount to be created
-    uint256 tokens = _getTokenAmount(weiAmount);
-
-    // update state
-    if (isPrivatesalePeriod()) {
-      PrivatesaleWeiRaised = PrivatesaleWeiRaised.add(weiAmount);
-    } else if (isPresalePeriod()) {
-      PresaleWeiRaised = PresaleWeiRaised.add(weiAmount);
-    } else if (isMainsalePeriod()) {
-      mainsaleWeiRaised = mainsaleWeiRaised.add(weiAmount);
+    // fallback function can be used to buy tokens
+    function() payable public {
+        buyTokens(msg.sender);
     }
 
-    emit TokenPurchase(msg.sender, _beneficiary, weiAmount, tokens);
-    mint(_beneficiary, tokens);
+    // low level token purchase function
+    function buyTokens(address _investor) public  payable returns (uint256){
+        require(_investor != address(0));
+        if (isPrivatesalePeriod()) {
+          require(whitelist[msg.sender]);
+        }
+        require(validPurchase());
+        uint256 weiAmount = msg.value;
+        uint256 tokens = _getTokenAmount(weiAmount);
+        if (tokens == 0) {revert();}
 
-    _forwardFunds();
-  }
+        // update state
+        if (isPrivatesalePeriod()) {
+          PrivatesaleWeiRaised = PrivatesaleWeiRaised.add(weiAmount);
+        } else if (isPresalePeriod()) {
+          PresaleWeiRaised = PresaleWeiRaised.add(weiAmount);
+        } else if (isMainsalePeriod()) {
+          mainsaleWeiRaised = mainsaleWeiRaised.add(weiAmount);
+        }
+        tokenAllocated = tokenAllocated.add(tokens);
+        mint(_investor, tokens, owner);
 
-  function _getTokenAmount(uint256 _weiAmount) internal view returns(uint256) {
-    return _weiAmount.mul(rate);
-  }
-
-  function _forwardFunds() internal {
-    wallet.transfer(msg.value);
-  }
-
-  function isPrivatesalePeriod() public view returns (bool) {
-    if (now >= privatesaleStartTime && now < privatesaleEndTime) {
-      return true;
-    }
-    return false;
-  }
-
-  function isPresalePeriod() public view returns(bool) {
-    if (now >= presaleStartTime && now < presaleEndTime) {
-      return true;
-    }
-    return false;
-  }
-
-  function isMainsalePeriod() public view returns(bool) {
-    if (now >= mainsaleStartTime && now < mainsaleEndTime) {
-      return true;
-    }
-    return false;
-  }
-
-  // Finish: Mint Extra Tokens as needed before finalizing the Crowdsale.
-  function finish(
-    address _teamFund,
-    address _reserveFund,
-    address _bountyFund,
-    address _partnershipFund
-    ) public onlyOwner {
-    require(_teamFund != address(0));
-    require(_reserveFund != address(0));
-    require(_bountyFund != address(0));
-    require(_partnershipFund != address(0));
-    require(now < mainsaleEndTime);
-
-    uint256 alreadyMinted = token.totalSupply();
-    require(alreadyMinted < maxTokens);
-
-    uint256 unsoldTokens = totalTokensForSale.sub(alreadyMinted);
-    if (unsoldTokens > 0) {
-      tokensForReserve = tokensForReserve.add(unsoldTokens);
+        emit TokenPurchase(_investor, weiAmount, tokens);
+        if (deposited[_investor] == 0) {
+            countInvestor = countInvestor.add(1);
+        }
+        deposit(_investor);
+        wallet.transfer(weiAmount);
+        return tokens;
     }
 
-    mint(_teamFund, tokensForTeam);
-    mint(_reserveFund, tokensForReserve);
-    mint(_bountyFund, tokensForBounty);
-    mint(_partnershipFund, tokenForPartnership);
-    finishMinting();
-  }
-
-  // @return true if the transaction can buy tokens
-  function validPurchase() internal view returns (bool) {
-    bool withinCap;
-    if (isPrivatesalePeriod()) {
-      withinCap = PrivatesaleWeiRaised.add(msg.value) <= privatesaleCap;
-    } else if (isPresalePeriod()) {
-      withinCap = PresaleWeiRaised.add(msg.value) <= presaleCap;
-    } else if (isMainsalePeriod()) {
-      withinCap = mainsaleWeiRaised.add(msg.value) <= mainsaleCap;
+    function _getTokenAmount(uint256 _weiAmount) internal view returns(uint256) {
+      return _weiAmount.mul(rate);
     }
-    bool withinPeriod = isPrivatesalePeriod() || isPresalePeriod() || isMainsalePeriod();
-    bool minimumContribution = msg.value >= 0.5 ether;
-    return withinPeriod && minimumContribution && withinCap;
-  }
+
+    // ====================== Price Management =================
+    function setPrice() public onlyOwner {
+      if (isPrivatesalePeriod()) {
+        rate = 20000;
+      } else if (isPresalePeriod()) {
+        rate = 12500;
+      } else if (isMainsalePeriod()) {
+        rate = 5000;
+      }
+    }
+
+    function isPrivatesalePeriod() public view returns (bool) {
+      if (now >= privatesaleStartTime && now < privatesaleEndTime) {
+        return true;
+      }
+      return false;
+    }
+
+    function isPresalePeriod() public view returns (bool) {
+      if (now >= presaleStartTime && now < presaleEndTime) {
+        return true;
+      }
+      return false;
+    }
+
+    function isMainsalePeriod() public view returns (bool) {
+      if (now >= mainsaleStartTime && now < mainsaleEndTime) {
+        return true;
+      }
+      return false;
+    }
+
+    function deposit(address investor) internal {
+        deposited[investor] = deposited[investor].add(msg.value);
+    }
+
+    function mintForOwner(address _wallet) internal returns (bool result) {
+        result = false;
+        require(_wallet != address(0));
+        balances[_wallet] = balances[_wallet].add(INITIAL_SUPPLY);
+        result = true;
+    }
+
+    function getDeposited(address _investor) public view returns (uint256){
+        return deposited[_investor];
+    }
+
+    // @return true if the transaction can buy tokens
+    function validPurchase() internal view returns (bool) {
+      bool withinCap =  true;
+      if (isPrivatesalePeriod()) {
+        withinCap = PrivatesaleWeiRaised.add(msg.value) <= privatesaleCap;
+      } else if (isPresalePeriod()) {
+        withinCap = PresaleWeiRaised.add(msg.value) <= presaleCap;
+      } else if (isMainsalePeriod()) {
+        withinCap = mainsaleWeiRaised.add(msg.value) <= mainsaleCap;
+      }
+      bool withinPeriod = isPrivatesalePeriod() || isPresalePeriod() || isMainsalePeriod();
+      bool minimumContribution = msg.value >= 0.5 ether;
+      return withinPeriod && minimumContribution && withinCap;
+    }
+
+    // Finish: Mint Extra Tokens as needed before finalizing the Crowdsale.
+    function finalize(
+      address _teamFund,
+      address _reserveFund,
+      address _bountyFund,
+      address _partnershipFund
+      ) public onlyOwner returns (bool result) {
+        require(_teamFund != address(0));
+        require(_reserveFund != address(0));
+        require(_bountyFund != address(0));
+        require(_partnershipFund != address(0));
+        require(now < mainsaleEndTime);
+        result = false;
+        mint(_teamFund, tokensForTeam, owner);
+        mint(_reserveFund, tokensForReserve, owner);
+        mint(_bountyFund, tokensForBounty, owner);
+        mint(_partnershipFund, tokenForPartnership, owner);
+        wallet.transfer(this.balance);
+        finishMinting();
+        emit Finalized();
+        result = true;
+    }
 
 }
