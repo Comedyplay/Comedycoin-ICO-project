@@ -327,7 +327,8 @@ contract MintableToken is StandardToken, Ownable {
      */
     function claimTokens(address _token) public onlyOwner {
         if (_token == 0x0) {
-            owner.transfer(this.balance);
+           address ownerBalance = this;
+           owner.transfer(ownerBalance.balance);
             return;
         }
         MintableToken token = MintableToken(_token);
@@ -543,7 +544,8 @@ contract ComedyplayCrowdsale is Ownable, WhiteListAccess, Crowdsale, MintableTok
         mint(_reserveFund, tokensForReserve, owner);
         mint(_bountyFund, tokensForBounty, owner);
         mint(_partnershipFund, tokenForPartnership, owner);
-        wallet.transfer(this.balance);
+        address contractBalance = this;
+        wallet.transfer(contractBalance.balance);
         finishMinting();
         emit Finalized();
         result = true;

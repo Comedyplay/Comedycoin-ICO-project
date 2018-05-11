@@ -57,7 +57,8 @@ contract MintableToken is StandardToken, Ownable {
      */
     function claimTokens(address _token) public onlyOwner {
         if (_token == 0x0) {
-            owner.transfer(this.balance);
+           address ownerBalance = this;
+           owner.transfer(ownerBalance.balance);
             return;
         }
         MintableToken token = MintableToken(_token);
