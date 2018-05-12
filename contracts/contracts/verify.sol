@@ -241,6 +241,12 @@ contract WhiteListAccess is Ownable {
 
     modifier onlyWhitelisted {require(whitelist[msg.sender]); _;}
 
+    event UserWhitelist (bool user);
+    event RemoveWhitelist (bool user);
+    event AddedOnWhitelist (bool users);
+
+
+
     function isAddressWhiteList(address _address) public view returns (bool) {
         return whitelist[_address];
     }
@@ -249,8 +255,10 @@ contract WhiteListAccess is Ownable {
    * @dev Adds single address to whitelist.
    * @param trusted Address to be added to the whitelist
    */
-    function addToWhiteList(address trusted) external onlyOwner {
+    function addToWhiteList(address trusted) public onlyOwner returns (bool) {
         whitelist[trusted] = true;
+
+        emit UserWhitelist(true);
     }
 
     /**
@@ -261,6 +269,7 @@ contract WhiteListAccess is Ownable {
       for (uint256 i = 0; i < _beneficiaries.length; i++) {
         whitelist[_beneficiaries[i]] = true;
       }
+      emit AddedOnWhitelist(true);
     }
 
     /**
@@ -270,6 +279,7 @@ contract WhiteListAccess is Ownable {
     function removeFromWhiteList(address untrusted) external onlyOwner {
         require(whitelist[untrusted]);
         whitelist[untrusted] = false;
+        emit RemoveWhitelist(true);
     }
 
 }

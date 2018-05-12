@@ -18,6 +18,24 @@ contract('ComedyplayCrowdsale', function (accounts) {
         });
     });
 
+    // Test case: tokenAllocated fo the tokens
+    it("tokenAllocated", function () {
+        return ComedyplayCrowdsale.deployed().then(function (instance) {
+            contractInstance = instance;
+            return contractInstance.tokenAllocated();
+        }).then(function (data) {
+            assert.equal(web3.fromWei(data), 0, "Total tokenAllocated should be 0");
+        });
+    });
+
+    it("should contain 10000 MyToken in the creator balance", () => {
+    return ComedyplayCrowdsale.deployed().then(instance => {
+      return instance.balanceOf.call(owner);
+    }).then(balance => {
+      assert.equal(web3.fromWei(balance), 700000000, "700000000 wasn't in the creator balance");
+    });
+  });
+
     // Test case: check current rate of the tokens
     it("Current rate of the tokens", function () {
         return ComedyplayCrowdsale.deployed().then(function (instance) {
@@ -113,5 +131,63 @@ contract('ComedyplayCrowdsale', function (accounts) {
                 assert(error.message.indexOf('revert') >= 0, "error should be revert");
             });
     });
+
+    // Test case: token allocated
+    it("check user whitelist", function () {
+        return ComedyplayCrowdsale.deployed().then(function (instance) {
+            contractInstance = instance;
+            return contractInstance.isAddressWhiteList(whitelistUser);
+        }).then(function (data) {
+            assert.equal(data, false, "data");
+        });
+    });
+
+    // Test case: token allocated
+    it("add user on whitelist", function () {
+        return ComedyplayCrowdsale.deployed().then(function (instance) {
+            contractInstance = instance;
+            return contractInstance.addToWhiteList(whitelistUser,{
+              from: owner
+            });
+        }).then(function (receipt) {
+            assert.equal(receipt.logs[0].event, "UserWhitelist", "UserWhitelist");
+            assert.equal(receipt.logs[0].args.user, true, "title must be ");
+        });
+    });
+
+    // Test case: token allocated
+    it("check user whitelist or not", function () {
+        return ComedyplayCrowdsale.deployed().then(function (instance) {
+            contractInstance = instance;
+            return contractInstance.isAddressWhiteList(whitelistUser);
+        }).then(function (data) {
+            assert.equal(data, true, "data");
+        });
+    });
+
+    // Test case: Only whitlist user can purchase the token
+    it("after whitelisted purchse the tokens", function () {
+        return ComedyplayCrowdsale.deployed().then(function (instance) {
+            contractInstance = instance;
+
+            return contractInstance.sendTransaction({
+                from: accounts[1],
+                value: web3.toWei(1, "ether")
+            });
+        }).then(function (receipt) {
+            assert.equal(receipt.logs[0].event, "Mint", "UserWhitelist");
+            assert.equal(receipt.logs[0].args.to, whitelistUser, "title must be ");
+        });
+    });
+
+    it("should contain 20000 CCP in the invester balance", () => {
+    return ComedyplayCrowdsale.deployed().then(instance => {
+      return instance.balanceOf.call(whitelistUser);
+    }).then(balance => {
+      assert.equal(web3.fromWei(balance), 20000, "20000 wasn't in the  balance");
+    });
+  });
+
+
 
 });
