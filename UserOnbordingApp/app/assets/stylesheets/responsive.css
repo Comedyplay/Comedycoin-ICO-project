@@ -1,0 +1,164 @@
+@media screen and (max-width: 1080px) {
+	.agree-checkbox {
+    font-size: 20px;
+  }
+  .left-bar .nav-link {
+  	padding: 15px 0;
+  }
+}
+@media screen and (max-width: 992px) {
+	.login-title {
+		font-size: 22px;
+	}
+	.login-header img {
+		max-width: 45px;
+	}
+	.login-header {
+    padding: 35px 30px 0;
+	}
+	.password-form {
+    padding: 50px 30px 10px;
+	}
+	.left-bar span, .left-bar .nav-link, .gray-btn {
+		font-size: 18px;
+	}
+	.left-bar .nav-link {
+		padding: 10px 0;
+	}
+	.password-form input, .forgot-password, .remember-checkbox label, .agree-checkbox {
+    font-size: 16px;
+	}
+	.remember-checkbox label {
+		padding-left: 28px;
+	}
+	.remember-checkbox span:before {
+		width: 18px;
+		height: 18px;
+	}
+	.remember-checkbox span:after {
+		font-size: 13px;
+		left: 3px;
+		top: 5px;;
+	}
+	.middle-box {
+		padding: 30px 15px 25px;
+	}
+	header .navbar-brand img {
+		max-width: 80px;
+	}
+	.left-bar span {
+		height: 30px;
+		width: 30px;
+		line-height: 30px;
+		margin-right: 4px;
+	}
+	.login-footer {
+		padding: 12px 30px;
+	}
+	#agreements .gray-btn {
+	  max-width: 370px;
+	}
+}
+@media screen and (max-width: 767px) {
+	body {
+		height: auto;
+	}
+	.create-btn, .login-title {
+		font-size: 16px;
+	}
+	.password-form, .signin-form, .recover-form, .account-form {
+		padding: 30px 25px 10px;
+	}
+	.login-header {
+    padding: 40px 25px 0;
+	}
+	.login-header img {
+		max-width: 40px;
+	}
+	.password-form .form-group, .signin-form .form-group {
+		padding: 10px 0;
+	}
+	.password-form input, .login-footer h6, #agreements .gray-btn, .forgot-password,
+	.remember-checkbox label, .agree-checkbox span:after, .agree-checkbox {
+		font-size: 14px;
+	}
+	.help-btn {
+		font-size: 24px;
+		max-width: 140px;
+    line-height: 45px
+	} 
+	.login-footer img {
+    max-width: 30px;
+	}
+	.message-box {
+		right: 8px;
+		bottom: 60px;
+	}
+	.help-form .form-group {
+		margin-bottom: 5px;
+	}
+	.remember-checkbox label {
+		padding-left: 24px;
+	}
+	.remember-checkbox span:before {
+		width: 16px;
+		height: 16px;
+	}
+	.remember-checkbox span:after {
+		font-size: 12px;
+		left: 2px;
+		top: 4px;
+	}
+	.agree-checkbox label {
+		padding-left: 25px;
+		top: -8px;
+	}
+	.agree-checkbox span:before {
+    top: 2px;
+    height: 20px;
+    width: 20px;
+	}
+	.agree-checkbox span:after {
+    left: 3px;
+    top: 5px;
+	}
+	.left-bar {
+		border: none; 
+	}
+	.left-bar span {
+		height: 30px;
+		width: 30px;
+		line-height: 30px;
+		margin-right: 10px;
+	}
+	.left-bar .nav-link {
+		padding: 5px 0;
+	}
+	.left-bar .nav-link, .left-bar span, .form-title, input.text-field + label > span {
+		font-size: 18px;
+	}
+	#agreements .login-title {
+    padding-left: 0;
+	}
+	.agree-checkbox, #agreements .login-title { 
+	  text-align: center;
+	}
+	header .navbar-brand img {
+		max-width: 60px;
+	}
+	input.text-field:focus + label > span,
+	input.text-field:valid + label > span {
+  	top: -60px;
+	}
+	#identity .create-btn {
+		margin: 20px 0;
+	}
+	.identity-form .row {
+		padding: 0 20px;
+	}
+	.identity-form + .create-btn {
+		float: none;
+    margin: 0 auto;
+    display: block;
+ 	}
+}

@@ -1,0 +1,99 @@
+ <header>
+      <nav class="navbar navbar-light navbar-expand-lg">
+        <a class="navbar-brand" href="JavaScript:void(0)">
+          <img src="images/logo.png">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ml-auto main-menu">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdownMenu" data-toggle="dropdown" aria-expanded="false">
+                Test
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                <a class="dropdown-item" href="#">Test1</a>
+                <a class="dropdown-item" href="#">Test2</a>
+                <a class="dropdown-item" href="#">Test3</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header> 
+     <!-- Header End -->
+
+     <!-- Middle Start -->
+    <main>
+      <div class="container-fluid">
+        <div class="middle-box">
+          <div class="row">
+            <div class="col-md-3 col-12 col-sm-3">
+              <div class="nav flex-column nav-pills left-bar" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" data-toggle="pill" href="#agreements" role="tab"><span>1</span> Agreements</a>
+                <a class="nav-link" data-toggle="pill" href="#identity" role="tab"><span>2</span> Identity</a>
+                <a class="nav-link" data-toggle="pill" href="#payment" role="tab"><span>3</span> Payment</a>
+                <a class="nav-link" data-toggle="pill" href="#confirmation" role="tab"><span>4</span> Confirmation</a>
+              </div>
+            </div>
+            <div class="col-md-9 col-12 col-sm-9">
+              <div class="tab-content">
+                <div class="tab-pane fade show active" id="agreements" role="tabpanel">
+                  <h2 class="login-title">Agreements</h2>
+                  <div class="agree-checkbox">
+                    <label>
+                      <input type="checkbox" checked="checked">
+                      <span></span>
+                    </label>
+                    I have read and agree with Comedy play <a href="JavaScript:void(0)">Term and Conditions</a>
+                  </div>
+                  <a href="JavaScript:void(0);" class="gray-btn btn pull-right">i agree with these statements</a>
+                </div>
+                <div class="tab-pane fade text-center" id="identity" role="tabpanel">
+                  <h2 class="login-title">Identity</h2>
+                  <a href="JavaScript:void(0);"><i class="fa fa-angle-left pull-left"></i></a>
+                  <h1>You are all set</h1>  
+                  <h5>Your document successfully uploaded</h5>
+                  <img src="images/congrats.png" alt="congrats">
+                  <h2>We are now verifying your identify</h2>
+                  <h5>You will receive an email from us when it’s done and this page will be updated</h5>
+                  <a href="JavaScript:void(0);" class="btn create-btn">Redo</a>
+                  <a href="JavaScript:void(0);" class="btn create-btn">Conform</a> 
+                </div>  
+                <div class="tab-pane fade" id="payment" role="tabpanel">Payment</div>
+                <div class="tab-pane fade" id="confirmation" role="tabpanel">Confirmation</div>
+              </div>
+            </div>
+          </div> 
+        </div>
+        <div class="message-box">
+          <h4 class="text-center">Leave us a message</h4>
+          <form class="help-form">
+            <div class="form-group">
+              <label>Your name</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Email address*</label>
+              <input type="email" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>How can we help you?*</label>
+              <textarea rows="3" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+              <label>Attachments</label>
+              <label class="attachment">
+                <i class="fa fa-paperclip"></i> Add file or drop here
+                <input type="file">
+              </label>
+            </div>
+            <div class="form-group text-right">
+              <button id="cancel-btn" type="button" class="btn gray-btn">Cancel</button>
+              <button id="send-btn" type="submit" class="btn gray-btn">Send</button>
+            </div>
+          </form>
+        </div>
+        <a href="JavaScript:void(0);" class="help-btn"><i class="fa fa-question-circle-o"></i> HELP</a>
+      </div>  
+    </main>
