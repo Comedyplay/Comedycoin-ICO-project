@@ -1,0 +1,24 @@
+<%= render "user/header" %>
+<main>
+  <div class="container-fluid">
+    <div class="middle-box">
+      <div class="row">
+        <%= render "user/links" %>
+        <div class="col-md-9 col-12 col-sm-9">
+          <div class="tab-content">
+            <div class="tab-pane fade show active text-center identity" id="verified-identity" role="tabpanel">
+              <h2 class="login-title">Identity</h2>
+              <br>
+              <%= image_tag asset_path('verified-identity.png')%>
+              <h3>Your identity is successfully verified and approved.</h3>
+              <a href="/payment" class="btn create-btn">Next</a>
+              <%#= link_to "Next", next_wizard_path, class: "btn create-btn" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= render "user/message_box" %>
+    <a href="JavaScript:void(0);" class="help-btn"><i class="fa fa-question-circle-o"></i> HELP</a>
+  </div>  
+</main>

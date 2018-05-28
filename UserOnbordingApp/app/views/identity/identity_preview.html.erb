@@ -1,0 +1,28 @@
+<%= render "user/header" %>
+<main>
+  <div class="container-fluid">
+    <div class="middle-box">
+      <div class="row">
+        <%= render "user/links" %>
+        <div class="col-md-9 col-12 col-sm-9">
+          <div class="tab-content">
+            <div class="tab-pane fade show active text-center identity" id="check-readability" role="tabpanel">
+              <h2 class="login-title">Identity</h2>
+              <h1 class="passport-check">Check readability</h1>
+              <h5>Make sure your passport details are clear to read,<br> with no blur or glare</h5>
+              <br>
+              <div class="passport-box">
+                <%= image_tag @user.user_profile.identity_photo(:thumb), size: "400x200"%>
+              </div>
+              <br>
+              <%= link_to "Redo", previous_wizard_path, class: "btn create-btn" %>
+              <%= link_to "Confirm", next_wizard_path, class: "btn create-btn" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= render "user/message_box" %>
+    <a href="JavaScript:void(0);" class="help-btn"><i class="fa fa-question-circle-o"></i> HELP</a>
+  </div>  
+</main>

@@ -1,24 +1,34 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AuthApp</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Comedy Play</title>     
+
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png"> 
+    <link rel="stylesheet" type="text/css" href="/assets/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/custom_style.css">
+    <link rel="stylesheet" type="text/css" href="/assets/responsive.css">
+
+    <title>Comedyplay Ico</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <div id="user_nav">
-      <% if user_signed_in? %>
-        Signed in as <%= current_user.email %>. Not you?
-        <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-      <% else %>
-        <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
-      <% end %>
     </div>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag "rails.validations" %>
   </head>
 
   <body>
     <%= yield %>
+    <script src="/assets/jquery.js"></script>
+    <script src="/assets/bootstrap.min.js"></script>
+    <script src="/assets/custom.js"></script>
+
   </body>
 </html>

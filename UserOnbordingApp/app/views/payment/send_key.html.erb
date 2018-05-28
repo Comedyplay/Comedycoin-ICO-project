@@ -1,0 +1,32 @@
+<%= render "user/header" %>
+<main>
+  <div class="container-fluid">
+    <div class="middle-box">
+      <div class="row">
+        <%= render "user/links" %>
+        <div class="col-md-9 col-12 col-sm-9">
+          <div class="tab-content">
+            <div class="tab-pane fade calculator show active text-center" id="payment-send" role="tabpanel">
+              <a href="JavaScript:void(0);">
+                <i class="fa fa-angle-left pull-left"></i>
+              </a>
+              <br>
+              <h3>Send exactly <%= @user.order.amount %> ETH to this address:</h3>
+              <h5 id="bar"><%= @user.order.address %></h5>
+
+              <br>
+              <a href="JavaScript:void(0);" class="btn create-btn clipboard-btn" data-clipboard-action="copy" data-clipboard-target="#bar">copy to clipboard</a>
+              <br>
+              <%= image_tag asset_path('qr-code.png')%>
+              <%= link_to "return to calculator", previous_wizard_path, class: "btn create-btn" %>
+              <br>
+              <a href="/user/confirmation" class="btn create-btn pull-right">Next</a>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+    <%= render "user/message_box" %>
+    <a href="JavaScript:void(0);" class="help-btn"><i class="fa fa-question-circle-o"></i> HELP</a>
+  </div>  
+</main>

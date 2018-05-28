@@ -5,7 +5,7 @@
           <h2 class="login-title">Sign in</h2>
         </div>
         <div class="col-md-2 col-sm-2 col-3 text-right">
-          <img src="../assets/logo.png" alt="logo">
+          <%= image_tag asset_path('logo.png')%>
         </div>  
         </div> 
         <%= form_for(resource, as: resource_name, url: session_path(resource_name),html: {class: "signin-form"}) do |f| %>
@@ -16,20 +16,22 @@
             </label>
           </div>
           <div class="form-group">
-            <%= f.text_field :password, autofocus: true, autocomplete: "off",class: "text-field form-control",required: true %>
+            <%= f.password_field :password, autofocus: true, autocomplete: "off",class: "text-field form-control",required: true %>
             <label>
               <span>Password</span>
             </label>
           </div>
           <% if devise_mapping.rememberable? -%>
-            <div class="form-group remember-checkbox">
+            <div class="form-group checkbox">
               <%= f.check_box :remember_me %>
               <label>
                 <span>Remember me</span>
               </label>
+              <%= link_to 'Forgot password?', new_user_password_path, class: 'forgot-password pull-right'%>
             </div>
-            
-            <%= link_to 'Forgot password?', new_user_password_path, class: 'forgot-password pull-right'%>
+            <%#= link_to 'Resend Email', users_resend_email_path, class: 'forgot-password pull-right'%>
+            <br>
+            <br>
           <% end -%>
 
           <div class="form-group">
@@ -37,39 +39,12 @@
           </div>
         <% end %>  
         <div class="login-footer text-right">
-          <h6>powered by</h6> 
-          <img src="../assets/logo.png" alt="logo">
+          <h6>powered by</h6>
+          <%= image_tag asset_path('logo.png')%>
         </div>        
       </div>
-      <div class="message-box">
-        <h4 class="text-center">Leave us a message</h4>
-        <form class="help-form">
-          <div class="form-group">
-            <label>Your name</label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Email address*</label>
-            <input type="email" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>How can we help you?*</label>
-            <textarea rows="3" class="form-control"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Attachments</label>
-            <label class="attachment">
-              <i class="fa fa-paperclip"></i> Add file or drop here
-              <input type="file">
-            </label>
-          </div>
-          <div class="form-group text-right">
-            <button id="cancel-btn" type="button" class="btn gray-btn">Cancel</button>
-            <button id="send-btn" type="submit" class="btn gray-btn">Send</button>
-          </div>
-        </form>
-      </div>
+      <%= render "user/message_box" %>
       <a href="JavaScript:void(0);" class="help-btn"><i class="fa fa-question-circle-o"></i> HELP</a>
     </div>  
 
-<%#= render "devise/shared/links" %>
+<%= render "devise/shared/links" %>

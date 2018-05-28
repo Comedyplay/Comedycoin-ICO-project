@@ -1,0 +1,75 @@
+<%= render "user/header" %>
+<main>
+  <div class="container-fluid">
+    <div class="middle-box">
+      <div class="row">
+        <%= render "user/links" %>
+        <div class="col-md-9 col-12 col-sm-9">
+          <div class="tab-content">
+            <div class="tab-pane fade calculator show active" id="payment-calculator" role="tabpanel">
+              <h2 class="login-title text-center">calculator</h2>
+              <h3>Quantity</h3>
+              <h5>The minimum purchase is 10,000 CCP</h5>
+              <br>
+              <div class="calculator-form">
+                <%= form_for @user, url: wizard_path, method: :put do |f| %>
+                  <%= f.hidden_field :address, name: 'order[address]', value: @user.public_key %>
+                  <%= f.hidden_field :user_id, name: 'order[user_id]', value: @user.id %>
+                  <div class="row">
+                    <div class="col-md-5">
+                      <label>You pay</label> 
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">ETH</span>
+                        </div> 
+                        <input type="number" class="text-field" id="ethValue" value="1" min="1" name=order[amount]>
+                      </div>
+                    </div>
+                    <div class="col-md-2 text-center">
+                      <i class="fa fa-arrows-h"></i> 
+                    </div>
+                    <div class="col-md-5">
+                      <label>You Get</label>
+                      <div class="input-group get-input">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">CPP <%= image_tag asset_path('cpp.png')%></span>
+                        </div> 
+                        <input type="number" class="text-field" id="CCPValue" value="20000" name=order[token]>
+                      </div>  
+                    </div>
+                  </div>
+                  <%= f.submit "get my tokens", class: "btn create-btn pull-right"%>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+    <%= render "user/message_box" %>
+    <a href="JavaScript:void(0);" class="help-btn"><i class="fa fa-question-circle-o"></i> HELP</a>
+  </div>  
+</main>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(document).on('keyup mouseup', '#ethValue', function(){
+      if($(this).val() != ''){
+        $("#CCPValue").val(parseInt($(this).val() * 20000))
+      }
+      else{
+        // $(this).val(1)
+        $("#CCPValue").val(0)
+      }
+    })
+
+    $(document).on('keyup mouseup', '#CCPValue', function(){
+      if($(this).val() != ''){
+        $("#ethValue").val($(this).val() / 20000) 
+      }
+      else{
+        $("#ethValue").val(0)
+      }
+    })
+  })
+</script>

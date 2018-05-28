@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Welcome to Comedy Play <%= @help.name %>, <%= @help.email %></h1>
+    <p>
+      You successfully submit your query to Comedy Play,
+      <%= @help.description %>
+    </p>
+    <%= image_tag @help.image(:thumb), size: "400x200"%>
+    <p>Thanks for joining and have a great day!</p>
+  </body>
+</html>

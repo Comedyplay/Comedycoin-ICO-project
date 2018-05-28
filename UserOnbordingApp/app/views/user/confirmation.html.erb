@@ -1,0 +1,31 @@
+<%= render "header" %>
+<main>
+  <div class="container-fluid">
+    <div class="middle-box">
+      <div class="row">
+        <%= render "links" %>
+        <div class="col-md-9 col-12 col-sm-9">
+          <div class="tab-content">
+            <div class="tab-pane fade show active text-center" id="confirmation" role="tabpanel">
+              <h2 class="login-title">Confirmation</h1>
+              <h4>Information</h4>
+              <h5>Ethereum transaction confirmations may take up to 2 hours.<br> You will recieve email updates of your purchase</h5>
+              <br>
+              <a href="JavaScript:void(0);" class="btn create-btn">buy more token</a>
+              <div class="awalting-footer">
+                <h6 class="text-left">Awaiting payment confirmation</h6>
+                <div class="row">
+                  <div class="text-left col-md-4 col-sm-4 col-4">Order #<%= @user.order.id %></div>
+                  <div class="col-md-4 col-md-4 col-sm-4 col-4"><%= @user.order.amount %> ETH</div>
+                  <div class="text-right col-md-4 col-md-4 col-sm-4 col-4 padding-left-none"><%= @user.order.token %> CCP</div>
+                </div>  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+    <%= render "message_box" %>
+    <a href="JavaScript:void(0);" class="help-btn"><i class="fa fa-question-circle-o"></i> HELP</a>
+  </div>  
+</main>

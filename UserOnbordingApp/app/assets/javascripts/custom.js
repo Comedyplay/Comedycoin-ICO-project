@@ -1,8 +1,8 @@
 $(document).ready(function(){
-  $(".help-btn").click(function(){
-    $(".message-box").show();
+  $("#next-form-btn").click(function(){
+    $("#identity-form").hide();
+    $("#identity-next").show();  
   });
-  $("#cancel-btn").click(function(){
-    $(".message-box").hide();
-  });
-});	
+});
+
+

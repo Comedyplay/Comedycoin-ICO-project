@@ -1,0 +1,283 @@
+@media screen and (max-width: 992px) {
+	.login-title, #passport-photo h2, #uplode-photo h1, #identity-next h3, #payment-send h3 {
+		font-size: 22px;
+	}
+	.login-header img {
+		max-width: 45px;
+	}
+	.login-header {
+    padding: 35px 30px 0;
+	}
+	.password-form {
+    padding: 50px 30px 10px;
+	}
+	.account-form, .signin-form {
+	   padding: 30px 30px 10px;
+	}
+	.recover-form {
+	   padding: 20px 30px;
+	}
+	.token-sale {
+	   padding: 0;
+	}
+	.token-sale li {
+	   padding: 0 10px;
+	}
+	.left-bar span, .left-bar .nav-link, .gray-btn, #identity-next h5, #payment-send h5, .create-btn, .form-title, #confirmation h5, .left-bar .nav-link.active .fa-check {
+		font-size: 18px;
+	}
+	.left-bar .nav-link {
+		padding: 10px 0;
+	}
+	.password-form input, .forgot-password, .remember-checkbox label, #agreements .checkbox  {
+    font-size: 16px;
+	}
+	.remember-checkbox label {
+		padding-left: 28px;
+	}
+	.remember-checkbox span:before {
+		width: 18px;
+		height: 18px;
+	}
+	.remember-checkbox span:after {
+		font-size: 13px;
+		left: 3px;
+		top: 5px;;
+	}
+	.middle-box {
+		padding: 30px 15px 25px;
+	}
+	header .navbar-brand img {
+		max-width: 80px;
+	}
+	.left-bar span, .left-bar .nav-link .fa-check.active {
+		height: 30px;
+		width: 30px;
+		line-height: 30px;
+		margin-right: 4px;
+	}
+	.login-footer {
+		padding: 12px 30px;
+	}
+	#agreements .gray-btn {
+	  max-width: 370px;
+	}
+	#identity-next h3 {
+		padding-top: 20px;
+	}
+	#identity-next h5 {
+		padding: 15px 0;
+	}
+	.passport, #verified-identity img {
+    padding-bottom: 20px;
+	}
+}
+@media screen and (max-width: 767px) {
+	body {
+		height: auto;
+	}
+	.create-btn, .login-title, #passport-photo h2, #uplode-photo h1, #identity-next h3, #identity-next h5,
+	#payment-send h5, #confirmation h5, .token-sale li, #check-photo h5, #check-readability h5, #all-set h5 {
+		font-size: 16px;
+	}
+	.password-form, .signin-form, .recover-form, .account-form {
+		padding: 30px 25px 10px;
+	}
+	.login-header {
+    padding: 40px 25px 0;
+	}
+	.login-header img {
+		max-width: 40px;
+	}
+	.password-form .form-group, .signin-form .form-group, #identity-next h5, #check-readability h5 {
+		padding: 10px 0;
+	}
+	.password-form input, .login-footer h6, #agreements .gray-btn, .forgot-password,
+	.remember-checkbox label, .agree-checkbox span:after, #agreements .checkbox, .token-sale li{
+		font-size: 14px;
+	}
+	.help-btn {
+		font-size: 24px;
+		max-width: 140px;
+    line-height: 45px
+	} 
+	.login-footer img {
+    max-width: 30px;
+	}
+	.message-box {
+		right: 8px;
+		bottom: 12px;
+	}
+	.help-form .form-group {
+		margin-bottom: 10px;
+	}
+	.remember-checkbox label {
+		padding-left: 24px;
+	}
+	.remember-checkbox span:before {
+		width: 16px;
+		height: 16px;
+	}
+	.awalting-footer, .remember-checkbox span:after {
+		font-size: 12px;
+	}
+	.remember-checkbox span:after {
+		left: 2px;
+		top: 4px;
+	}
+	.agree-checkbox label {
+		padding-left: 25px;
+		top: -8px;
+	}
+	.agree-checkbox span:before {
+    top: 2px;
+    height: 20px;
+    width: 20px;
+	}
+	.agree-checkbox span:after {
+    left: 3px;
+    top: 5px;
+	}
+	.left-bar {
+		border: none; 
+	}
+	.left-bar span {
+		height: 30px;
+		width: 30px;
+		line-height: 30px;
+		margin-right: 10px;
+	}
+	.left-bar .nav-link, #identity-next h3 {
+		padding: 5px 0;
+	}
+	.left-bar span, .form-title, input.text-field + label > span, #payment-send h3,
+	.middle-box .login-title, #confirmation h4, .feedback, #payment-wallet h3, #check-photo h1 {
+		font-size: 18px;
+	}
+	#agreements .login-title, #identity-form .login-title {
+    padding-left: 0;
+	}
+	#agreements .checkbox, #agreements .login-title { 		
+	  text-align: center;
+	}
+	header .navbar-brand img {
+		max-width: 60px;
+	}
+	header .navbar-toggler {
+		padding: 3px 7px;	
+	}
+	input.text-field:focus + label > span,
+	input.text-field:valid + label > span {
+  	top: -60px;
+	}
+	#identity .create-btn {
+		margin: 10px auto;
+	}
+	.identity-form .row {
+		padding: 0 20px;
+	}
+	.identity-form + .create-btn, #payment-send .create-btn, #confirmation .create-btn, #payment-calculator .create-btn, #agreements .gray-btn  {
+		float: none;	
+    margin: 0 auto;
+    display: block;
+ 	}
+ 	#identity-form .login-title, .token-sale, .main-menu .nav-link	 {
+ 		text-align: center;
+ 		display: block;
+ 	}
+ 	#identity, #payment-send, #identity-form .login-title, .passport, .token-sale {
+ 		padding: 0;
+ 	}
+ 	#payment-send h5 {
+ 		word-break: break-word;
+ 	}
+ 	#payment-send img {
+ 		max-width: 170px;
+ 	}
+ 	header .navbar, .token-sale li, .awalting-footer {
+ 		padding: 10px;
+ 	}
+ 	.feedback {
+ 		right: -50px;
+ 		padding: 5px 15px;
+ 	}
+ 	.calculator-form .text-field, .calculator-form .input-group-prepend, #payment-wallet input {
+ 		margin-bottom: 40px;
+ 		min-height: 46px;
+ 	}
+ 	.create-btn, .gray-btn, #agreements .gray-btn, .identity .create-btn, .calculator-form .fa-arrows-h {
+ 		line-height: 24px;
+ 	}
+ 	.message-box {
+ 		max-width: 260px;
+ 	}
+ 	.message-box .form-group {
+ 		margin-bottom: 3px;
+ 	}
+ .message-box label.attachment {
+ 		min-width: auto;
+ 		margin-bottom: 8px;
+ 	}
+ 	.message-box .gray-btn {
+ 		line-height: 16px;
+ 	}
+ 	.message-box form {
+ 		padding: 3px 15px;
+ 	}
+ 	#check-readability h1, #all-set h1  {
+ 		font-size: 22px;
+ 	}
+ 	#agreements .checkbox label {
+ 		padding-left: 0;
+ 		margin: 0;
+    vertical-align: middle;
+ 	}
+ 	#agreements .gray-btn {
+ 		margin-top: 10%;
+ 	}
+ 	.passport .fa-id-card-o {
+ 		padding: 15px;
+ 		font-size: 65px;
+ 	}
+ 	.passport h6 {
+ 		margin-bottom: 20px;
+ 	}
+ 	.attachment .fa-upload {
+ 		font-size: 46px; 
+ 	}
+ 	#payment-send .create-btn, #confirmation .create-btn, #payment-calculator .create-btn {
+ 		width: 100%;
+    max-width: 230px;
+    float: none;
+ 	}
+ 	#payment-send .create-btn.pull-right {
+ 		max-width: 140px;
+ 	}
+ 	#confirmation .padding-left-none {
+ 		padding-left: 0;
+ 	}
+ 	.awalting-footer {
+ 		margin: 0;
+ 	}
+ 	.left-bar span, .left-bar .nav-link .fa-check.active {
+		height: 26px;
+		width: 26px;
+		line-height: 26px;
+		margin-right: 4px;
+		font-size: 16px;
+	}
+	.left-bar .nav-link {
+		font-size: 15px;
+		line-height: 25px;
+	}
+	#payment-wallet {
+    margin-bottom: 10%;
+	}
+}	
+@media  (max-device-width: 767px) and (orientation: landscape) {
+	.message-box form {
+ 		padding: 8px 8px 0;
+	  overflow-y: scroll;
+ 		max-height: 275px;
+	}
+} 

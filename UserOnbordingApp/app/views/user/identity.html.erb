@@ -1,0 +1,186 @@
+<%= render "header" %>
+<main>
+  <div class="container-fluid">
+    <div class="middle-box">
+      <div class="row">
+        <%= render "links" %>
+        <div class="col-md-9 col-12 col-sm-9">
+          <div class="tab-content">
+            <div class="tab-pane fade show active identity" id="identity" role="tabpanel">
+              <div class="tab-content">
+                <div class="tab-pane fade show active" id="identity-form">
+                  <h2 class="login-title">Identity</h2>
+                  <%= form_for @user, url: wizard_path, method: :put, validate: true do |f| %>
+                    <%= f.hidden_field :user_id, name: 'user_profile[user_id]', value: @user.id %>
+                    <h5 class="form-title">Identity information</h5>
+                    <br>
+                    <div class="row">
+                      <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                          <%= text_field :user_profile, :first_name, value: @user_profile.present? ? @user_profile.first_name : '', class: "text-field form-control", validate: true %>
+                          <label>
+                            <span>First Name *</span>
+                          </label>
+                          <% if @user_profile.present? && @user_profile.errors[:first_name].any? %>
+                            <%= @user_profile.errors[:first_name].join(",") %>
+                          <% end %>  
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                          <%= text_field :user_profile, :last_name, value: @user_profile.present? ? @user_profile.last_name : '', class: "text-field form-control", validate: true %>
+                          <label>
+                            <span>Last Name *</span>
+                          </label>
+                          <% if @user_profile.present? && @user_profile.errors[:last_name].any? %>
+                            <%= @user_profile.errors[:last_name].join(",") %>
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6 col-sm-6">
+                        <label>
+                          <span>Gender *</span>
+                        </label>
+                        <div class="form-group">
+                          <%= select("user_profile", "gender", [['Male'], ['Female']], {include_blank: 'None', class: "text-field form-control", value: @user_profile.present? ? @user_profile.gender : '' }) %>
+                          <% if @user_profile.present? && @user_profile.errors[:gender].any? %>
+                            <%= @user_profile.errors[:gender].join(",") %>
+                          <% end %>
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                          <%= text_field :user_profile, :dob, value: @user_profile.present? ? @user_profile.dob : '', class: "text-field form-control", validate: true, id: "datepicker", data:{ provide:'datepicker' } %>
+                          <label>
+                            <span>Date of birth *</span>
+                          </label>
+                          <% if @user_profile.present? && @user_profile.errors[:dob].any? %>
+                            <%= @user_profile.errors[:dob].join(",") %>
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                          <label>
+                            <span>Country *</span>
+                          </label>
+                          <%= select("user_profile", "country", CS.countries.collect { |country| [country[1]] }, {include_blank: 'None', class: "text-field form-control", value: @user_profile.present? ? @user_profile.country : '' }) %>
+                          <% if @user_profile.present? && @user_profile.errors[:country].any? %>
+                            <%= @user_profile.errors[:country].join(",") %>
+                          <% end %>
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                          <%= text_field :user_profile, :phone_number, value: @user_profile.present? ? @user_profile.phone_number : '', class: "text-field form-control", validate: true %>
+                          <label>
+                            <span>Phone *</span>
+                          </label>
+                          <% if @user_profile.present? && @user_profile.errors[:phone_number].any? %>
+                            <%= @user_profile.errors[:phone_number].join(",") %>
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+                    <br>
+                    <h5 class="form-title">Residence information</h5>
+                    <br>
+                    <div class="row">
+                      <div class="col-md-4 col-sm-6">
+                        <div class="form-group">
+                          <%= text_field :user_profile, :building_number, value: @user_profile.present? ? @user_profile.building_number : '', class: "text-field form-control", validate: true %>
+                          <label>
+                            <span>Building number *</span>
+                          </label>
+                          <% if @user_profile.present? && @user_profile.errors[:building_number].any? %>
+                            <%= @user_profile.errors[:building_number].join(",") %>
+                          <% end %>
+                        </div>
+                      </div>
+                      <div class="col-md-8 col-sm-6">
+                        <div class="form-group">
+                          <%= text_field :user_profile, :street_address, value: @user_profile.present? ? @user_profile.street_address : '', class: "text-field form-control", validate: true %>
+                          <label>
+                            <span>Street address *</span>
+                          </label>
+                          <% if @user_profile.present? && @user_profile.errors[:street_address].any? %>
+                            <%= @user_profile.errors[:street_address].join(",") %>
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                          <%= text_field :user_profile, :city, value: @user_profile.present? ? @user_profile.city : '', class: "text-field form-control", validate: true %>
+                          <label>
+                            <span>City *</span>
+                          </label>
+                          <% if @user_profile.present? && @user_profile.errors[:city].any? %>
+                            <%= @user_profile.errors[:city].join(",") %>
+                          <% end %>
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                          <%= text_field :user_profile, :state, value: @user_profile.present? ? @user_profile.state : '', class: "text-field form-control", validate: true %>
+                          <label>
+                            <span>State *</span>
+                          </label>
+                          <% if @user_profile.present? && @user_profile.errors[:state].any? %>
+                            <%= @user_profile.errors[:state].join(",") %>
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                          <label>
+                            <span>Country Address *</span>
+                          </label>
+                          <%= select("user_profile", "country_address", CS.countries.collect { |country| [country[1]] }, {include_blank: 'None', class: "text-field form-control", value: @user_profile.present? ? @user_profile.country_address : '' }) %>
+                          <% if @user_profile.present? && @user_profile.errors[:country_address].any? %>
+                            <%= @user_profile.errors[:country_address].join(",") %>
+                          <% end %>
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                          <%= text_field :user_profile, :zip_code, value: @user_profile.present? ? @user_profile.zip_code : '', class: "text-field form-control", validate: true %>
+                          <label>
+                            <span>Zip code *</span>
+                          </label>
+                          <% if @user_profile.present? && @user_profile.errors[:zip_code].any? %>
+                            <%= @user_profile.errors[:zip_code].join(",") %>
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+                    <br>
+                    <%= submit_tag "Next", class: "btn create-btn pull-right", id: "next-form-btn" %>
+                  <% end %>  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+    <%= render "message_box" %>
+    <a href="JavaScript:void(0);" class="help-btn"><i class="fa fa-question-circle-o"></i> HELP</a>
+  </div>  
+</main>
+
+<script type="text/javascript">
+
+/*
+  $(function () {
+    $('#datepicker').datepicker();
+  });
+*/
+</script>

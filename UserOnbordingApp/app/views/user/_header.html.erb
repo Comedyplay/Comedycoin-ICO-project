@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-light navbar-expand-sm">
+        <a class="navbar-brand" href="JavaScript:void(0)">
+          <%= image_tag asset_path('logo.png')%>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="token-sale">
+            <li>
+              Raised: 10,000,000/49000000 CCP
+              <br>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 30%">
+                </div>
+              </div>
+            </li>  
+            <li>
+              Token sale end in
+              <br>
+              <span id="timer">05:00:00:00</span>
+            </li>
+          </ul>
+          <ul class="navbar-nav ml-auto main-menu">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href id="dropdownMenu" data-toggle="dropdown" aria-expanded="false" return="false"  %>
+                <%= @user.email.split('@').first %>
+              </a>
+              <div class="dropdown-content" aria-labelledby="dropdownMenu">
+                <% if user_signed_in? %>
+                  <%= link_to "Sign out", destroy_user_session_path, :method => :delete, class: "dropdown-item"%>
+                <% end %>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+  </body>
+</html>
+
+
+<script>
+  var countDownDate = new Date("May 28, 2018 15:37:25").getTime();
+  var x = setInterval(function() {
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    document.getElementById("timer").innerHTML = days + "d " + hours + "h "
+    + minutes + "m " + seconds + "s ";
+    if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("timer").innerHTML = "EXPIRED";
+    }
+  }, 1000);
+</script>

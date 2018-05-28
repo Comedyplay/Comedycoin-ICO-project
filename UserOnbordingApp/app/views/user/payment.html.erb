@@ -1,0 +1,23 @@
+<%= render "user/header" %>
+<main>
+  <div class="container-fluid">
+    <div class="middle-box">
+      <div class="row">
+        <%= render "user/links" %>
+        <div class="col-md-9 col-12 col-sm-9">
+          <div class="tab-content">
+            <div class="tab-pane payment fade calculator show active text-center" id="payment-wallet" role="tabpanel">
+              <h3>ETH wallet Address</h3>
+              <br>
+              <input type="text" class="form-control" value="<%= @user.public_key %>" disabled>
+              <br>
+              <%= link_to "Next", next_wizard_path, class: "btn create-btn" %>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+    <%= render "user/message_box" %>
+    <a href="JavaScript:void(0);" class="help-btn"><i class="fa fa-question-circle-o"></i> HELP</a>
+  </div>  
+</main>
