@@ -20,6 +20,7 @@
 //= require rails.validations
 //= require clipboard
 //= require custom
+//= require web3_client
 
 
 $(document).ready(function(){
@@ -36,7 +37,7 @@ $(document).ready(function(){
   });
 
   $(".attachment").click(function(){
-    $(".fa-upload, .upload-text, .attachment br, .upload-image").hide();
+    $(".fa-upload, .upload-text, .attachment br, .upload-image, .fa-paperclip").hide();
     $("#myImg").css("opacity", "1");
   });
 
