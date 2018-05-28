@@ -20,6 +20,10 @@
 //= require rails.validations
 //= require clipboard
 //= require custom
+//= require web3.min
+//= require ethereumjs-wallet-0.6.0.min
+//= require contract
+//= require env
 //= require web3_client
 
 

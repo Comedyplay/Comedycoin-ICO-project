@@ -68,6 +68,7 @@ class UserController < ApplicationController
   private
 
   def user_profile_params
+    params[:user_profile][:dob] = Date.strptime(params[:user_profile][:dob], "%m/%d/%Y")
     params.require(:user_profile).permit(:first_name, :last_name, :gender, :dob, :country, :phone_number, :building_number, :street_address, :city, :state, :country_address, :zip_code, :user_id)
   end
 

@@ -45,9 +45,6 @@
     </header>
   </body>
 </html>
-<script src="/assets/env.js"></script>
-<script src="/assets/web3.min.js"></script>
-<script src="/assets/contract.js"></script>
 
 <script>
   var countDownDate = new Date("May 29, 2018 15:37:25").getTime();
@@ -68,14 +65,19 @@
 </script>
 
 <script type="text/javascript">
-  var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/"));
-  var ComedyplayContract = web3.eth.contract(ComedyplayContractABI).at(ComedyplayContractAddress);
 
-  // To get total sale tokens
-  function TotalTokenSale() {
-    ComedyplayContract.tokenAllocated(function (error, result) {
-      document.getElementById("token-sale").innerHTML = result.c[0];
-    })
-  }
+  $(document).ready(function(){
 
+    // To get total sale tokens
+    function TotalTokenSale() {
+      var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/"));
+      var ComedyplayContract = web3.eth.contract(ComedyplayContractABI).at(ComedyplayContractAddress);
+
+      ComedyplayContract.tokenAllocated(function (error, result) {
+        document.getElementById("token-sale").innerHTML = result.c[0];
+      });
+    }
+
+    TotalTokenSale();
+  });
 </script>

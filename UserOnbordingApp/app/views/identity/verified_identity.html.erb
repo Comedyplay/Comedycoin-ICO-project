@@ -11,8 +11,7 @@
               <br>
               <%= image_tag asset_path('verified-identity.png')%>
               <h3>Your identity is successfully verified and approved.</h3>
-              <a href="/payment/payment" class="btn create-btn">Next</a>
-              <%#= link_to "Next", next_wizard_path, class: "btn create-btn" %>
+              <%= link_to "Next", payment_path(:payment), class: "btn create-btn" %>
             </div>
           </div>
         </div>
