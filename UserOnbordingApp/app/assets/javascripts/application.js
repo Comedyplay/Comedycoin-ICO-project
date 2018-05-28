@@ -10,7 +10,7 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require rails-ujs
+
 //= require activestorage
 //= require turbolinks
 //= require jquery
@@ -43,8 +43,22 @@ $(document).ready(function(){
   $("#aggrement_checkbox").click(function(){
     $("#aggrement_button").toggleClass("button-color");
   });
+
+  $(function () {
+    $("#image-preview").change(function () {
+      if (this.files && this.files[0]) {
+        var reader = new FileReader();
+        reader.onload = imageIsLoaded;
+        reader.readAsDataURL(this.files[0]);
+      }
+    });
+  });
 });
 
+function imageIsLoaded(e) {
+  $('#myImg').attr('src', e.target.result);
+  $('#yourImage').attr('src', e.target.result);
+};
 
 $(document).on('ready page:load', function() {
   var path1 = window.location.pathname.split('/')[2]

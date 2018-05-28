@@ -15,7 +15,7 @@
                 <label class="attachment">
                   <%= image_tag asset_path('uplode-photo.png'), class: "upload-image"%>
                   <img id="myImg" src="#" alt="your image" class="fade" height=250 width=400>
-                  <%= f.file_field :user_photo, required: true, name: 'user_profile[user_photo]' %>
+                  <%= f.file_field :user_photo, required: true, name: 'user_profile[user_photo]', id: "image-preview" %>
                 </label>
                 <%= f.submit "Next", class: "btn create-btn"%>
               <% end %>
@@ -28,20 +28,3 @@
     <a href="JavaScript:void(0);" class="help-btn"><i class="fa fa-question-circle-o"></i> HELP</a>
   </div>  
 </main>
-
-<script type="text/javascript">
-  $(function () {
-    $(":file").change(function () {
-      if (this.files && this.files[0]) {
-        var reader = new FileReader();
-        reader.onload = imageIsLoaded;
-        reader.readAsDataURL(this.files[0]);
-      }
-    });
-  });
-
-  function imageIsLoaded(e) {
-      $('#myImg').attr('src', e.target.result);
-      $('#yourImage').attr('src', e.target.result);
-  };
-</script>

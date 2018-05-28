@@ -771,3 +771,6 @@ input.text-field + label > span {
   background-color: #5c59a9;
   color: blue;
 }
+.identity-fields {
+  color: #5c59a9;
+}

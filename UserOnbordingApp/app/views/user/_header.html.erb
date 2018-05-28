@@ -13,7 +13,7 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="token-sale">
             <li>
-              Raised: 10,000,000/49000000 CCP
+              Raised: <span id="token-sale">10,000,000</span>/49000000 CCP
               <br>
               <div class="progress">
                 <div class="progress-bar" role="progressbar" style="width: 30%">
@@ -44,9 +44,8 @@
   </body>
 </html>
 
-
 <script>
-  var countDownDate = new Date("May 28, 2018 15:37:25").getTime();
+  var countDownDate = new Date("May 29, 2018 15:37:25").getTime();
   var x = setInterval(function() {
     var now = new Date().getTime();
     var distance = countDownDate - now;

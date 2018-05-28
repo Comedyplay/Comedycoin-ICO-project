@@ -42,7 +42,6 @@ class UserController < ApplicationController
         render_wizard(@validate_user)
       end
     when :identity
-      byebug
       if @user.user_profile.present?
         if @user.user_profile.update_attributes(user_profile_params)
           redirect_to identity_path("select_identity")

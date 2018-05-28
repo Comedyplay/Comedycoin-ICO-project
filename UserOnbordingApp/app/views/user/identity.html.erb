@@ -41,7 +41,7 @@
                     <div class="row">
                       <div class="col-md-6 col-sm-6">
                         <label>
-                          <span>Gender *</span>
+                          <span class="identity-fields">Gender *</span>
                         </label>
                         <div class="form-group">
                           <%= select("user_profile", "gender", [['Male'], ['Female']], {include_blank: 'None', class: "text-field form-control", value: @user_profile.present? ? @user_profile.gender : '' }) %>
@@ -66,7 +66,7 @@
                       <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                           <label>
-                            <span>Country *</span>
+                            <span class="identity-fields">Country *</span>
                           </label>
                           <%= select("user_profile", "country", CS.countries.collect { |country| [country[1]] }, {include_blank: 'None', class: "text-field form-control", value: @user_profile.present? ? @user_profile.country : '' }) %>
                           <% if @user_profile.present? && @user_profile.errors[:country].any? %>
@@ -141,7 +141,7 @@
                       <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                           <label>
-                            <span>Country Address *</span>
+                            <span class="identity-fields">Country Address *</span>
                           </label>
                           <%= select("user_profile", "country_address", CS.countries.collect { |country| [country[1]] }, {include_blank: 'None', class: "text-field form-control", value: @user_profile.present? ? @user_profile.country_address : '' }) %>
                           <% if @user_profile.present? && @user_profile.errors[:country_address].any? %>
@@ -175,12 +175,3 @@
     <a href="JavaScript:void(0);" class="help-btn"><i class="fa fa-question-circle-o"></i> HELP</a>
   </div>  
 </main>
-
-<script type="text/javascript">
-
-/*
-  $(function () {
-    $('#datepicker').datepicker();
-  });
-*/
-</script>
