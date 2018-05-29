@@ -30,7 +30,7 @@
 $(document).ready(function(){
   
   var clipboard = new Clipboard('.clipboard-btn');
-  console.log(clipboard);
+  // console.log(clipboard);
 
   $(".help-btn").click(function(){
     $(".message-box").show(); 

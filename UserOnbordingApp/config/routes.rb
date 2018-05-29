@@ -8,6 +8,6 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root :to => "home#index"
   match '/send_email',    to: 'user#send_email', via: [:post, :patch]
-  get '/users/resend_email',    to: 'users#resend_email'
+  match '/resend_email',    to: 'user#resend_email', via: [:post, :patch]
   match '/mail_send',    to: 'users#mail_send', via: [:post, :patch]
 end

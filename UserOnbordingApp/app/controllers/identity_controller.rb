@@ -20,15 +20,21 @@ class IdentityController < ApplicationController
     when :check_photo
       render_wizard
     when :verify_identity
-      render_wizard
-    when :verified_identity
-      # if @user.validate_user.present?
-      #   if @user.validate_user.identity_verified == true
+      if @user.validate_user.present?
+        if @user.validate_user.identity_verified == true
+          redirect_to wizard_path(:verified_identity)
+        else
           render_wizard
-      #   else
-      #     redirect_to wizard_path(:verify_identity)
-      #   end
-      # end
+        end
+      end
+    when :verified_identity
+      if @user.validate_user.present?
+        if @user.validate_user.identity_verified == true
+          render_wizard
+        else
+          redirect_to wizard_path(:verify_identity)
+        end
+      end
     end 
   end
 

@@ -46,7 +46,7 @@
   </body>
 </html>
 
-<script>
+<script type="text/javascript">
   var countDownDate = new Date("May 29, 2018 15:37:25").getTime();
   var x = setInterval(function() {
     var now = new Date().getTime();
@@ -62,22 +62,4 @@
         document.getElementById("timer").innerHTML = "EXPIRED";
     }
   }, 1000);
-</script>
-
-<script type="text/javascript">
-
-  $(document).ready(function(){
-
-    // To get total sale tokens
-    function TotalTokenSale() {
-      var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/"));
-      var ComedyplayContract = web3.eth.contract(ComedyplayContractABI).at(ComedyplayContractAddress);
-
-      ComedyplayContract.tokenAllocated(function (error, result) {
-        document.getElementById("token-sale").innerHTML = result.c[0];
-      });
-    }
-
-    TotalTokenSale();
-  });
 </script>
